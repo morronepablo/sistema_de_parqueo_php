@@ -165,8 +165,17 @@ include ('layout/admin/datos_usuario_sesion.php');
                                                                                 $('#respuesta_ticket').html(datos);
                                                                             });
 
-                                                                            var url_2 = 'tickets/controller_registrar_ticket.php';
+                                                                            var url_2 = 'clientes/controller_registrar_clientes.php';
                                                                             $.get(url_2, {
+                                                                                nombre_cliente:nombre_cliente,
+                                                                                dni:dni,
+                                                                                placa:placa
+                                                                            }, function (datos) {
+                                                                                $('#respuesta_ticket').html(datos);
+                                                                            });
+
+                                                                            var url_3 = 'tickets/controller_registrar_ticket.php';
+                                                                            $.get(url_3, {
                                                                                 placa:placa,
                                                                                 nombre_cliente:nombre_cliente,
                                                                                 dni:dni,
@@ -177,6 +186,7 @@ include ('layout/admin/datos_usuario_sesion.php');
                                                                             }, function (datos) {
                                                                                 $('#respuesta_ticket').html(datos);
                                                                             });
+
                                                                         }
                                                                     })
                                                                 </script>
