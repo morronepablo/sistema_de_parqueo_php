@@ -3,7 +3,7 @@
 global $pdo;
 include ('../app/config.php');
 
-
+$placa = $_GET['placa'];
 $nombre_cliente = $_GET['nombre_cliente'];
 $dni = $_GET['dni'];
 $cuviculo = $_GET['cuviculo'];
@@ -12,9 +12,10 @@ $hora_ingreso = $_GET['hora_ingreso'];
 $user_sesion = $_GET['user_session'];
 
 $sentencia = $pdo->prepare('INSERT INTO tb_tickets
-(nombre_cliente,dni,cuviculo,fecha_ingreso,hora_ingreso,user_sesion, fyh_creacion, estado)
-VALUES ( :nombre_cliente,:dni,:cuviculo,:fecha_ingreso,:hora_ingreso,:user_sesion,:fyh_creacion,:estado)');
+(placa_auto,nombre_cliente,dni,cuviculo,fecha_ingreso,hora_ingreso,user_sesion, fyh_creacion, estado)
+VALUES ( :placa_auto,:nombre_cliente,:dni,:cuviculo,:fecha_ingreso,:hora_ingreso,:user_sesion,:fyh_creacion,:estado)');
 
+$sentencia->bindParam(':placa_auto',$placa);
 $sentencia->bindParam(':nombre_cliente',$nombre_cliente);
 $sentencia->bindParam(':dni',$dni);
 $sentencia->bindParam(':cuviculo',$cuviculo);

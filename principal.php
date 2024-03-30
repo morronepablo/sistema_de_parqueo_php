@@ -44,7 +44,6 @@ include ('layout/admin/datos_usuario_sesion.php');
                         <div class="card-body">
                             <div class="row">
                                 <?php
-
                                 $query_mapeos = $pdo->prepare("SELECT * FROM tb_mapeos WHERE estado = '1'");
                                 $query_mapeos->execute();
                                 $mapeos = $query_mapeos->fetchAll(PDO::FETCH_ASSOC);
@@ -61,7 +60,7 @@ include ('layout/admin/datos_usuario_sesion.php');
                                                 <button class="btn btn-success" style="width: 100%; height: 114px;" data-toggle="modal" data-target="#modal<?=$id_map;?>">
                                                     <p><?=$mapeo['estado_espacio']?></p>
                                                 </button>
-                                                <!-- Modal -->
+                                                <!-- Modal Libre -->
                                                 <div class="modal fade" id="modal<?=$id_map;?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered">
                                                         <div class="modal-content text-left">
@@ -203,9 +202,88 @@ include ('layout/admin/datos_usuario_sesion.php');
                                         <div class="col">
                                             <center>
                                                 <h2><?=$mapeo['nro_espacio'];?></h2>
-                                                <button class="btn btn-info">
+                                                <button class="btn btn-info" id="btn_ocupado" data-toggle="modal" data-target="#modal_ocupado<?=$id_map;?>">
                                                     <img src="<?=$URL;?>/public/imagenes/auto.png" width="60px" alt="">
                                                 </button>
+                                                 <?php
+                                                    $query_datos = $pdo->prepare("SELECT * FROM tb_tickets WHERE cuviculo = '$nro_espacio' AND estado = '1'");
+                                                    $query_datos->execute();
+                                                    $datos = $query_datos->fetchAll(PDO::FETCH_ASSOC);
+                                                    $contador_datos = 0;
+                                                    foreach ($datos as $dato) {
+                                                        $contador_datos = $contador_datos + 1;
+                                                        $id_ticket          = $dato['id_ticket'];
+                                                        $nombre_cliente     = $dato['nombre_cliente'];
+                                                        $dni                = $dato['dni'];
+                                                        $cuviculo           = $dato['cuviculo'];
+                                                        $date               = date_create($dato['fecha_ingreso']);
+                                                        $fecha_ingreso      = date_format($date, 'd-m-Y');
+                                                        $hora_ingreso       = $dato['hora_ingreso'];
+                                                        $user_sesion        = $dato['user_sesion'];
+                                                    }
+                                                 ?>
+                                                <!-- Modal Ocupado -->
+                                                <div class="modal fade" id="modal_ocupado<?=$id_map;?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered">
+                                                        <div class="modal-content text-left">
+                                                            <div class="modal-header bg-info">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Datos del Vehículo</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="form-group row">
+                                                                    <label for="staticEmail" class="col-sm-7 col-form-label">Placa:</label>
+                                                                    <div class="col-sm-5">
+                                                                        <input type="text" style="text-transform: uppercase" class="form-control" id="placa_buscar<?=$id_map;?>">
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group row">
+                                                                    <label for="staticEmail" class="col-sm-4 col-form-label">Nombre:</label>
+                                                                    <div class="col-sm-8">
+                                                                        <input type="text" class="form-control" id="nombre_cliente<?=$id_map;?>">
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group row">
+                                                                    <label for="staticEmail" class="col-sm-4 col-form-label">DNI:</label>
+                                                                    <div class="col-sm-8">
+                                                                        <input type="text" class="form-control" id="dni<?=$id_map;?>">
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group row">
+                                                                    <label for="staticEmail" class="col-sm-4 col-form-label">Fecha de ingreso:</label>
+                                                                    <div class="col-sm-8">
+                                                                        <input type="date" class="form-control" id="fecha_ingreso<?=$id_map;?>">
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group row">
+                                                                    <label for="staticEmail" class="col-sm-4 col-form-label">Hora de ingreso:</label>
+                                                                    <div class="col-sm-8">
+                                                                        <input type="time" class="form-control" id="hora_ingreso<?=$id_map;?>">
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group row">
+                                                                    <label for="staticEmail" class="col-sm-4 col-form-label">Cuvículo:</label>
+                                                                    <div class="col-sm-8">
+                                                                        <input type="text" class="form-control" id="cuviculo<?=$id_map;?>" disabled>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                                <button type="button" class="btn btn-warning">Reimprimir ticket</button>
+                                                                <button type="button" class="btn btn-info">Facturar</button>
+                                                            </div>
+                                                            <div id="respuesta_ticket"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <p><?=$mapeo['estado_espacio']?></p>
                                             </center>
                                         </div>
