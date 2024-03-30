@@ -14,6 +14,13 @@ try {
     echo "error de conexion";
 }
 
-$URL = "http://localhost/www.sisparqueo.com"
+date_default_timezone_set("America/Argentina/Buenos_Aires");
+$fechaHora = date('Y-m-d H:i:s');
+$dia_actual = date('d');
+$mes_actual = date('m');
+$ano_actual = date('Y');
+
+$URL = "http://localhost/www.sisparqueo.com";
+$estado_del_registro = '1';
 
 ?>

@@ -1,5 +1,6 @@
 <?php
-    include ('../app/config.php');
+global $pdo;
+include ('../app/config.php');
 include ('../layout/admin/datos_usuario_sesion.php');
 ?>
 
@@ -24,6 +25,41 @@ include ('../layout/admin/datos_usuario_sesion.php');
         <br>
         <div class="container">
             <h2>Listado de Usuarios</h2>
+
+            <br>
+            <table border="1" class="table table-bordered table-sm table-striped table-responsive-sm">
+                <th><center>Nro</center></th>
+                <th><center>Nombre de usuarios</center></th>
+                <th><center>Email</center></th>
+                <th><center>Acción</center></th>
+
+                <?php
+
+                $query_usuario = $pdo->prepare("SELECT * FROM tb_usuarios WHERE estado = '1'");
+                $query_usuario->execute();
+                $usuarios = $query_usuario->fetchAll(PDO::FETCH_ASSOC);
+                $contador_usuario = 0;
+                foreach ($usuarios as $usuario) {
+                    $contador_usuario = $contador_usuario + 1;
+                    $id         = $usuario['id'];
+                    $nombres    = $usuario['nombres'];
+                    $email      = $usuario['email'];
+                ?>
+                    <tr>
+                        <td><center><?=$contador_usuario;?></center></td>
+                        <td><?=$nombres;?></td>
+                        <td><?=$email;?></td>
+                        <td>
+                            <center>
+                                <a href="update.php?id=<?=$id;?>" class="btn btn-success">Editar</a>
+                                <a href="delete.php?id=<?=$id;?>" class="btn btn-danger">Eliminar</a>
+                            </center>
+                        </td>
+                    </tr>
+                <?php
+                }
+                ?>
+            </table>
         </div>
     </div>
     <!-- /.content-wrapper -->

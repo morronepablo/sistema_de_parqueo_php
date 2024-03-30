@@ -1,5 +1,6 @@
 <?php
-    include ('app/config.php');
+global $pdo, $URL;
+include ('app/config.php');
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +23,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#">
-            <img src="" width="30" height="30" class="d-inline-block align-top" alt="">
+            <img src="<?=$URL;?>/public/imagenes/auto.png" width="30" height="30" class="d-inline-block align-top" alt="">
             SISPARQUEO
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,181 +56,53 @@
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             </form>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-ingresar">
                 Ingresar
             </button>
         </div>
     </nav>
 
-
     <div class="container">
-        <table>
-            <tr>
-                <td style="width: 100px">
-                    <p>
-                        <center>
-                            <h3><b>1</b></h3>
-                            <img src="public/imagenes/auto.png" width="50px" alt="auto">
-                        </center>
-                    </p>
-                </td>
-                <td style="width: 100px">
-                    <p>
-                    <center>
-                        <h3><b>2</b></h3>
-                        <img src="public/imagenes/auto.png" width="50px" alt="auto">
-                    </center>
-                    </p>
-                </td>
-                <td style="width: 100px">
-                    <p>
-                    <center>
-                        <h3><b>3</b></h3>
-                        <img src="public/imagenes/auto.png" width="50px" alt="auto">
-                    </center>
-                    </p>
-                </td>
-                <td style="width: 100px">
-                    <p>
-                    <center>
-                        <h3><b>4</b></h3>
-                        <img src="public/imagenes/auto.png" width="50px" alt="auto">
-                    </center>
-                    </p>
-                </td>
-                <td style="width: 100px">
-                    <p>
-                    <center>
-                        <h3><b>5</b></h3>
-                        <img src="public/imagenes/auto.png" width="50px" alt="auto">
-                    </center>
-                    </p>
-                </td>
-                <td style="width: 100px">
-                    <p>
-                    <center>
-                        <h3><b>6</b></h3>
-                        <img src="public/imagenes/auto.png" width="50px" alt="auto">
-                    </center>
-                    </p>
-                </td>
-                <td style="width: 100px">
-                    <p>
-                    <center>
-                        <h3><b>7</b></h3>
-                        <img src="public/imagenes/auto.png" width="50px" alt="auto">
-                    </center>
-                    </p>
-                </td>
-                <td style="width: 100px">
-                    <p>
-                    <center>
-                        <h3><b>8</b></h3>
-                        <img src="public/imagenes/auto.png" width="50px" alt="auto">
-                    </center>
-                    </p>
-                </td>
-                <td style="width: 100px">
-                    <p>
-                    <center>
-                        <h3><b>9</b></h3>
-                        <img src="public/imagenes/auto.png" width="50px" alt="auto">
-                    </center>
-                    </p>
-                </td>
-                <td style="width: 100px">
-                    <p>
-                    <center>
-                        <h3><b>10</b></h3>
-                        <img src="public/imagenes/auto.png" width="50px" alt="auto">
-                    </center>
-                    </p>
-                </td>
-            </tr>
+        <div class="row">
+            <?php
 
-            <tr>
-                <td style="width: 100px">
-                    <p>
-                    <center>
-                        <h3><b>11</b></h3>
-                        <img src="public/imagenes/auto.png" width="50px" alt="auto">
-                    </center>
-                    </p>
-                </td>
-                <td style="width: 100px">
-                    <p>
-                    <center>
-                        <h3><b>12</b></h3>
-                        <img src="public/imagenes/auto.png" width="50px" alt="auto">
-                    </center>
-                    </p>
-                </td>
-                <td style="width: 100px">
-                    <p>
-                    <center>
-                        <h3><b>13</b></h3>
-                        <img src="public/imagenes/auto.png" width="50px" alt="auto">
-                    </center>
-                    </p>
-                </td>
-                <td style="width: 100px">
-                    <p>
-                    <center>
-                        <h3><b>14</b></h3>
-                        <img src="public/imagenes/auto.png" width="50px" alt="auto">
-                    </center>
-                    </p>
-                </td>
-                <td style="width: 100px">
-                    <p>
-                    <center>
-                        <h3><b>15</b></h3>
-                        <img src="public/imagenes/auto.png" width="50px" alt="auto">
-                    </center>
-                    </p>
-                </td>
-                <td style="width: 100px">
-                    <p>
-                    <center>
-                        <h3><b>16</b></h3>
-                        <img src="public/imagenes/auto.png" width="50px" alt="auto">
-                    </center>
-                    </p>
-                </td>
-                <td style="width: 100px">
-                    <p>
-                    <center>
-                        <h3><b>17</b></h3>
-                        <img src="public/imagenes/auto.png" width="50px" alt="auto">
-                    </center>
-                    </p>
-                </td>
-                <td style="width: 100px">
-                    <p>
-                    <center>
-                        <h3><b>18</b></h3>
-                        <img src="public/imagenes/auto.png" width="50px" alt="auto">
-                    </center>
-                    </p>
-                </td>
-                <td style="width: 100px">
-                    <p>
-                    <center>
-                        <h3><b>19</b></h3>
-                        <img src="public/imagenes/auto.png" width="50px" alt="auto">
-                    </center>
-                    </p>
-                </td>
-                <td style="width: 100px">
-                    <p>
-                    <center>
-                        <h3><b>20</b></h3>
-                        <img src="public/imagenes/auto.png" width="50px" alt="auto">
-                    </center>
-                    </p>
-                </td>
-            </tr>
-        </table>
+            $query_mapeos = $pdo->prepare("SELECT * FROM tb_mapeos WHERE estado = '1'");
+            $query_mapeos->execute();
+            $mapeos = $query_mapeos->fetchAll(PDO::FETCH_ASSOC);
+            $contador_mapeos = 0;
+            foreach ($mapeos as $mapeo) {
+                $contador_mapeos    = $contador_mapeos + 1;
+                $id_map             = $mapeo['id_map'];
+                $nro_espacio        = $mapeo['nro_espacio'];
+                $estado_espacio     = $mapeo['estado_espacio'];
+                if($estado_espacio == "LIBRE") { ?>
+                    <div class="col">
+                        <center>
+                            <h2><?=$mapeo['nro_espacio'];?></h2>
+                            <button class="btn btn-success" style="width: 100%; height: 114px;">
+                                <p><?=$mapeo['estado_espacio']?></p>
+                            </button>
+                        </center>
+                    </div>
+                    <?php
+                }
+                if($estado_espacio == "OCUPADO") { ?>
+                    <div class="col">
+                        <center>
+                            <h2><?=$mapeo['nro_espacio'];?></h2>
+                            <button class="btn btn-info">
+                                <img src="<?=$URL;?>/public/imagenes/auto.png" width="60px" alt="">
+                            </button>
+                            <p><?=$mapeo['estado_espacio']?></p>
+                        </center>
+                    </div>
+                    <?php
+                }
+                ?>
+                <?php
+            }
+            ?>
+        </div>
     </div>
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
@@ -243,7 +116,7 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal-ingresar">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">

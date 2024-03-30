@@ -1,6 +1,7 @@
 CREATE TABLE tb_usuarios(
     id                  INT (11)        NOT NULL    AUTO_INCREMENT  PRIMARY KEY,
     nombres             VARCHAR (255)   NULL,
+    rol                 VARCHAR (100)   NULL,
     email               VARCHAR (255)   NULL,
     email_verificado    VARCHAR (255)   NULL,
     password_user       VARCHAR (255)   NULL,
