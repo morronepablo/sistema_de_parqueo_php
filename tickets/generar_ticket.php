@@ -11,7 +11,7 @@ $query_informaciones->execute();
 $informaciones = $query_informaciones->fetchAll(PDO::FETCH_ASSOC);
 $contador_informaciones = 0;
 foreach ($informaciones as $informacione) {
-    $contador_usuario = $contador_informaciones + 1;
+    $contador_informaciones = $contador_informaciones + 1;
     $id_informacion = $informacione['id_informacion'];
     $nombre_parqueo = $informacione['nombre_parqueo'];
     $actividad_empresa = $informacione['actividad_empresa'];
@@ -21,6 +21,23 @@ foreach ($informaciones as $informacione) {
     $telefono = $informacione['telefono'];
     $provincia = $informacione['provincia'];
     $pais = $informacione['pais'];
+}
+
+// cargar información del ticket
+$query_tickets = $pdo->prepare("SELECT * FROM tb_tickets WHERE estado = '1'");
+$query_tickets->execute();
+$tickets = $query_tickets->fetchAll(PDO::FETCH_ASSOC);
+$contador_tickets = 0;
+foreach ($tickets as $ticket) {
+    $contador_tickets   = $contador_tickets + 1;
+    $id_ticket          = $ticket['id_ticket'];
+    $nombre_cliente     = $ticket['nombre_cliente'];
+    $dni                = $ticket['dni'];
+    $cuviculo           = $ticket['cuviculo'];
+    $date = date_create($ticket['fecha_ingreso']);
+    $fecha_ingreso      = date_format($date, 'd-m-Y');
+    $hora_ingreso       = $ticket['hora_ingreso'];
+    $user_sesion        = $ticket['user_sesion'];
 }
 
 // create new PDF document
@@ -79,14 +96,14 @@ $html = '
         ---------------------------------------------------------------------------------
         <div style="text-align: left;">
             <b>DATOS DEL CLIENTE</b> <br>
-            <b>SEÑOR/A:</b> DIEGO TRINIDAD <br>
-            <b>DNI.:</b> 20365778 <br>
+            <b>SEÑOR/A:</b> '.$nombre_cliente.' <br>
+            <b>DNI.:</b> '.$dni.' <br>
             --------------------------------------------------------------------------------- <br>
-            <b>Cuvículo de paqueo:</b> 10    <br>
-            <b>Fecha de ingreso:</b> 12/03/2024 <br>
-            <b>Hora de ingreso:</b> 15:38 <br>
+            <b>Cuvículo de paqueo:</b> '.$cuviculo.'    <br>
+            <b>Fecha de ingreso:</b> '.$fecha_ingreso.' <br>
+            <b>Hora de ingreso:</b> '.$hora_ingreso.' <br>
             --------------------------------------------------------------------------------- <br>
-            <b>USUARIO:</b> MORRONE PABLO
+            <b>USUARIO:</b> '.$user_sesion.'
         </div>
     </P>
 </div>

@@ -812,7 +812,7 @@ class TCPDFBarcode {
 
 	/**
 	 * Standard 2 of 5 barcodes.
-	 * Used in airline ticket marking, photofinishing
+	 * Used in airline tickets marking, photofinishing
 	 * Contains digits (0 to 9) and encodes the data only in the width of bars.
 	 * @param string $code code to represent.
 	 * @param boolean $checksum if true add a checksum to the code

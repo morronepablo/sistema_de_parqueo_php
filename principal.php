@@ -1,6 +1,6 @@
 <?php
 
-global $URL, $pdo, $ano_actual, $mes_actual, $dia_actual;
+global $URL, $pdo, $ano_actual, $mes_actual, $dia_actual, $usuario_sesion;
 include ('app/config.php');
 include ('layout/admin/datos_usuario_sesion.php');
 
@@ -58,11 +58,11 @@ include ('layout/admin/datos_usuario_sesion.php');
                                         <div class="col">
                                             <center>
                                                 <h2><?=$mapeo['nro_espacio'];?></h2>
-                                                <button class="btn btn-success" style="width: 100%; height: 114px;" data-toggle="modal" data-target="#modal<?=$id_map?>">
+                                                <button class="btn btn-success" style="width: 100%; height: 114px;" data-toggle="modal" data-target="#modal<?=$id_map;?>">
                                                     <p><?=$mapeo['estado_espacio']?></p>
                                                 </button>
                                                 <!-- Modal -->
-                                                <div class="modal fade" id="modal<?=$id_map?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="modal<?=$id_map;?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered">
                                                         <div class="modal-content text-left">
                                                             <div class="modal-header bg-success">
@@ -73,30 +73,32 @@ include ('layout/admin/datos_usuario_sesion.php');
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class="form-group row">
-                                                                    <label for="staticEmail" class="col-sm-2 col-form-label">Placa:</label>
-                                                                    <div class="col-sm-7">
-                                                                        <input type="text" style="text-transform: uppercase" class="form-control" id="placa_buscar<?=$id_map?>">
+                                                                    <label for="staticEmail" class="col-sm-4 col-form-label">Placa: <span class="text-danger"><b>*</b></span></label>
+                                                                    <div class="col-sm-5">
+                                                                        <input type="text" style="text-transform: uppercase" class="form-control" id="placa_buscar<?=$id_map;?>">
                                                                     </div>
                                                                     <div class="col-sm-3">
-                                                                        <button class="btn btn-primary" id="btn_buscar_cliente<?=$id_map?>">
+                                                                        <button class="btn btn-primary" id="btn_buscar_cliente<?=$id_map;?>">
                                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                                                                                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
                                                                             </svg>
                                                                             Buscar
                                                                         </button>
                                                                         <script>
-                                                                            $('#btn_buscar_cliente<?=$id_map?>').click(function () {
+                                                                            $('#btn_buscar_cliente<?=$id_map;?>').click(function () {
                                                                                 var placa = $('#placa_buscar<?=$id_map?>').val();
+                                                                                var id_map = '<?=$id_map;?>';
 
                                                                                 if(placa == "") {
                                                                                     alert("Debe de completar el campo placa");
-                                                                                    $('#placa_buscar<?=$id_map?>').focus();
+                                                                                    $('#placa_buscar<?=$id_map;?>').focus();
                                                                                 } else {
                                                                                     var url = 'clientes/controller_buscar_cliente.php';
                                                                                     $.get(url, {
-                                                                                        placa:placa
+                                                                                        placa:placa,
+                                                                                        id_map:id_map
                                                                                     }, function (datos) {
-                                                                                        $('#respuesta_buscar_cliente<?=$id_map?>').html(datos);
+                                                                                        $('#respuesta_buscar_cliente<?=$id_map;?>').html(datos);
                                                                                     });
                                                                                 }
                                                                             });
@@ -105,12 +107,12 @@ include ('layout/admin/datos_usuario_sesion.php');
                                                                     </div>
                                                                 </div>
 
-                                                                <div id="respuesta_buscar_cliente<?=$id_map?>"></div>
+                                                                <div id="respuesta_buscar_cliente<?=$id_map;?>"></div>
 
                                                                 <div class="form-group row">
                                                                     <label for="staticEmail" class="col-sm-4 col-form-label">Fecha de ingreso:</label>
                                                                     <div class="col-sm-8">
-                                                                        <input type="date" class="form-control" value="<?=$ano_actual.'-'.$mes_actual.'-'.$dia_actual;?>">
+                                                                        <input type="date" class="form-control" id="fecha_ingreso<?=$id_map;?>" value="<?=$ano_actual.'-'.$mes_actual.'-'.$dia_actual;?>">
                                                                     </div>
                                                                 </div>
 
@@ -121,15 +123,65 @@ include ('layout/admin/datos_usuario_sesion.php');
                                                                             $hora_actual = date('H');
                                                                             $minutos_actual = date('i');
                                                                         ?>
-                                                                        <input type="time" class="form-control" value="<?=$hora_actual.':'.$minutos_actual;?>">
+                                                                        <input type="time" class="form-control" id="hora_ingreso<?=$id_map;?>" value="<?=$hora_actual.':'.$minutos_actual;?>">
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group row">
+                                                                    <label for="staticEmail" class="col-sm-4 col-form-label">Cuvículo:</label>
+                                                                    <div class="col-sm-8">
+                                                                        <input type="text" class="form-control" id="cuviculo<?=$id_map;?>" value="<?=$nro_espacio;?>" disabled>
                                                                     </div>
                                                                 </div>
 
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                                                <button type="button" class="btn btn-primary">Imprimir ticket</button>
+                                                                <button type="button" class="btn btn-primary" id="btn_registrar_ticket<?=$id_map;?>">Imprimir ticket</button>
+                                                                <script>
+                                                                    $('#btn_registrar_ticket<?=$id_map;?>').click(function () {
+                                                                        var placa = $('#placa_buscar<?=$id_map;?>').val();
+                                                                        var nombre_cliente = $('#nombre_cliente<?=$id_map;?>').val();
+                                                                        var dni = $('#dni<?=$id_map;?>').val();
+                                                                        var fecha_ingreso = $('#fecha_ingreso<?=$id_map;?>').val();
+                                                                        var hora_ingreso = $('#hora_ingreso<?=$id_map;?>').val();
+                                                                        var cuviculo = $('#cuviculo<?=$id_map;?>').val();
+                                                                        var user_session = '<?=$usuario_sesion;?>'
+
+                                                                        if(placa == "") {
+                                                                            alert("Debe de completar el campo placa");
+                                                                            $('#placa_buscar<?=$id_map;?>').focus();
+                                                                        } else if(nombre_cliente == "") {
+                                                                                alert("Debe de completar el campo nombre");
+                                                                                $('#nombre_cliente<?=$id_map;?>').focus();
+                                                                        } else if(dni == "") {
+                                                                            alert("Debe de completar el campo dni");
+                                                                            $('#dni<?=$id_map;?>').focus();
+                                                                        } else {
+                                                                            var url_1 = 'parqueo/controller_cambiar_estado_ocupado.php';
+                                                                            $.get(url_1, {
+                                                                                cuviculo:cuviculo
+                                                                            }, function (datos) {
+                                                                                $('#respuesta_ticket').html(datos);
+                                                                            });
+
+                                                                            var url_2 = 'tickets/controller_registrar_ticket.php';
+                                                                            $.get(url_2, {
+                                                                                placa:placa,
+                                                                                nombre_cliente:nombre_cliente,
+                                                                                dni:dni,
+                                                                                fecha_ingreso:fecha_ingreso,
+                                                                                hora_ingreso:hora_ingreso,
+                                                                                cuviculo:cuviculo,
+                                                                                user_session:user_session
+                                                                            }, function (datos) {
+                                                                                $('#respuesta_ticket').html(datos);
+                                                                            });
+                                                                        }
+                                                                    })
+                                                                </script>
                                                             </div>
+                                                            <div id="respuesta_ticket"></div>
                                                         </div>
                                                     </div>
                                                 </div>

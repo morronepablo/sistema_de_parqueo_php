@@ -1,9 +1,10 @@
 <?php
 
-global $pdo;
+global $pdo, $id_map;
 include ('../app/config.php');
 
 $placa = strtoupper($_GET['placa']);
+$id_map = $_GET['id_map'];
 
 // echo $placa;
 
@@ -25,16 +26,16 @@ if($nombres_cliente == "") {
     // echo "el cliente es nuevo";
     ?>
     <div class="form-group row">
-        <label for="staticEmail" class="col-sm-2 col-form-label">Nombre:</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control">
+        <label for="staticEmail" class="col-sm-4 col-form-label">Nombre: <span class="text-danger"><b>*</b></span></label>
+        <div class="col-sm-8">
+            <input type="text" class="form-control" id="nombre_cliente<?=$id_map;?>">
         </div>
     </div>
 
     <div class="form-group row">
-        <label for="staticEmail" class="col-sm-2 col-form-label">DNI:</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control">
+        <label for="staticEmail" class="col-sm-4 col-form-label">DNI: <span class="text-danger"><b>*</b></span></label>
+        <div class="col-sm-8">
+            <input type="text" class="form-control" id="dni<?=$id_map;?>">
         </div>
     </div>
 <?php
@@ -42,16 +43,16 @@ if($nombres_cliente == "") {
     // echo $nombres_cliente.' - '.$dni_cliente;
     ?>
     <div class="form-group row">
-        <label for="staticEmail" class="col-sm-2 col-form-label">Nombre:</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" value="<?=$nombres_cliente;?>">
+        <label for="staticEmail" class="col-sm-4 col-form-label">Nombre: <span class="text-danger"><b>*</b></span></label>
+        <div class="col-sm-8">
+            <input type="text" class="form-control" id="nombre_cliente<?=$id_map;?>" value="<?=$nombres_cliente;?>">
         </div>
     </div>
 
     <div class="form-group row">
-        <label for="staticEmail" class="col-sm-2 col-form-label">DNI:</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" value="<?=$dni_cliente;?>">
+        <label for="staticEmail" class="col-sm-4 col-form-label">DNI: <span class="text-danger"><b>*</b></span></label>
+        <div class="col-sm-8">
+            <input type="text" class="form-control" id="dni<?=$id_map;?>" value="<?=$dni_cliente;?>">
         </div>
     </div>
 <?php

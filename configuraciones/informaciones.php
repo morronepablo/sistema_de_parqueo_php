@@ -70,8 +70,8 @@ include ('../layout/admin/datos_usuario_sesion.php');
                         <td><?=$pais;?></td>
                         <td>
                             <center>
-                                <a href="update_configuraciones.php?id=<?=$id_informacion;?>" class="btn btn-success">Editar</a>
-                                <a href="delete.php?id=<?=$id_informacion;?>" class="btn btn-danger">Eliminar</a>
+                                <a href="update_configuraciones.php?id=<?=$id_informacion;?>" class="btn btn-success btn-sm">Editar</a>
+                                <a href="delete_configuraciones.php?id=<?=$id_informacion;?>" class="btn btn-danger btn-sm">Eliminar</a>
                             </center>
                         </td>
                     </tr>

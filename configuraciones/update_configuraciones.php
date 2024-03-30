@@ -107,10 +107,10 @@ include ('../layout/admin/datos_usuario_sesion.php');
 
                             <div class="row">
                                 <div class="col-md-6">
-                                    <a href="mapeo-de-vehiculos.php" class="btn btn-default btn-block">Cancelar</a>
+                                    <a href="informaciones.php" class="btn btn-default btn-block">Cancelar</a>
                                 </div>
                                 <div class="col-md-6">
-                                    <button class="btn btn-success btn-block" id="btn_registrar_informacion">
+                                    <button class="btn btn-success btn-block" id="btn_actualizar_informacion">
                                         Actualizar
                                     </button>
                                 </div>
@@ -140,7 +140,8 @@ include ('../layout/admin/datos_usuario_sesion.php');
 </html>
 
 <script>
-    $('#btn_registrar_informacion').click(function () {
+    $('#btn_actualizar_informacion').click(function () {
+        var id_informacion = '<?=$id_informacion_get;?>';
         var nombre_parqueo = $('#nombre_parqueo').val();
         var actividad_empresa = $('#actividad_empresa').val();
         var sucursal = $('#sucursal').val();
@@ -175,8 +176,9 @@ include ('../layout/admin/datos_usuario_sesion.php');
             alert("Debe de completar el campo Pais");
             $('#pais').focus();
         } else {
-            var url = 'controller_create_informaciones.php';
+            var url = 'controller_update_informaciones.php';
             $.get(url, {
+                id_informacion:id_informacion,
                 nombre_parqueo:nombre_parqueo,
                 actividad_empresa:actividad_empresa,
                 sucursal:sucursal,
